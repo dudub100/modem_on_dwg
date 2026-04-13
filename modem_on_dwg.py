@@ -14,13 +14,20 @@ dwg_atten_base = st.sidebar.number_input("Measured Attenuation (dB/m)", value=2.
 f_meas_ghz = st.sidebar.number_input("at Measurement Frequency (GHz)", value=140.0, step=10.0)
 epsilon_r = st.sidebar.number_input("Relative Permittivity (εr)", value=2.1)
 
-# Physics Derivations
+# --- Physics Derivations ---
 c = 299792458 
 f_hz = f_meas_ghz * 1e9
 tan_delta = (dwg_atten_base * c) / (8.686 * np.pi * f_hz * np.sqrt(epsilon_r))
 dwg_slope_mhz_m = dwg_atten_base / (f_meas_ghz * 1000)
 
+# --- Updated Sidebar Display (Using Metrics for better visibility) ---
+st.sidebar.subheader("Calculated Material Specs")
+# Metrics work better across different screen sizes/browsers
+st.sidebar.metric(label="Tan Delta (δ)", value=f"{tan_delta:.6f}")
+st.sidebar.metric(label="Slope (dB/MHz/m)", value=f"{dwg_slope_mhz_m:.8f}")
+
 st.sidebar.divider()
+# ... rest of your sidebar code ...
 
 # --- Sidebar: Coherent Config ---
 st.sidebar.header("2. Coherent Configuration")
