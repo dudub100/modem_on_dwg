@@ -8,6 +8,28 @@ import plotly.graph_objects as go
 st.set_page_config(page_title="DWG Analyzer: Professional Mode", layout="wide")
 st.title("DWG Analysis: IEEE PAM-4 vs. Customizable Coherent")
 
+# --- Custom CSS for Smaller Sidebar Metrics ---
+st.markdown(
+    """
+    <style>
+    /* Targets the metric value (the number) */
+    [data-testid="stSidebar"] [data-testid="stMetricValue"] {
+        font-size: 16px !important;
+    }
+    /* Targets the metric label (the text) */
+    [data-testid="stSidebar"] [data-testid="stMetricLabel"] {
+        font-size: 12px !important;
+    }
+    /* Reduces padding between metrics to save vertical space */
+    [data-testid="stSidebar"] [data-testid="metric-container"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # --- Sidebar Inputs ---
 st.sidebar.header("1. Material Physics")
 dwg_atten_base = st.sidebar.number_input("Measured Attenuation (dB/m)", value=2.0, step=0.1)
